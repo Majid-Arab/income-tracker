@@ -4,6 +4,7 @@ specifiers:
   '@emotion/react': ^11.10.4
   '@mantine/core': ^5.4.0
   '@mantine/hooks': ^5.4.0
+  '@tabler/icons': ^1.96.0
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
   '@vitejs/plugin-react': ^2.1.0
@@ -16,6 +17,7 @@ dependencies:
   '@emotion/react': 11.10.4_w5j4k42lgipnm43s3brx6h3c34
   '@mantine/core': 5.4.0_oihobwhbj453cnyslcmpoj2bia
   '@mantine/hooks': 5.4.0_react@18.2.0
+  '@tabler/icons': 1.96.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -656,6 +658,21 @@ packages:
     dependencies:
       '@babel/runtime': 7.19.0
       react: 18.2.0
+    dev: false
+
+  /@tabler/icons/1.96.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-ZAQ64CHi5sOFQE7COoBmZbhIBtTX+4XNuiVZsr8kcqJX1bmrw6dFU0W9ONJamt/2TO997uVfSqxr2o0WZqZr/g==}
+    peerDependencies:
+      react: ^16.x || 17.x || 18.x
+      react-dom: ^16.x || 17.x || 18.x
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@types/parse-json/4.0.0:
