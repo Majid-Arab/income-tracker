@@ -1,6 +1,8 @@
-import { Card, Image, Text, Group, Badge, createStyles, Center, Button, Title, MantineProvider } from '@mantine/core';
+import { Card, Image, Text, Group, Badge, createStyles, Center, Button, Title, MantineProvider, Box } from '@mantine/core';
 import { IconDeviceDesktopAnalytics, IconGasStation, IconGauge, IconManualGearbox, IconUsers } from '@tabler/icons';
 import { useState } from 'react';
+import Banner from './components/Banner';
+import History from './components/History';
 import { Head } from './components/Head';
 import { Bill } from './Interface';
 
@@ -39,7 +41,11 @@ export default function App() {
 
   return (
     <Center style={{ width: 500 }}>
-      <Head addTransaction={addTransaction} transactions={transactions} deleteTransaction={deleteTransaction} />
+      <Box>
+        <Banner transactions={transactions} />
+        <History deleteTransaction={deleteTransaction} />
+        <Head addTransaction={addTransaction} transactions={transactions} deleteTransaction={deleteTransaction} />
+      </Box>
     </Center>
   );
 }

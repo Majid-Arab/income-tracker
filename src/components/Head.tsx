@@ -1,35 +1,35 @@
-import { Box, Button, Center, createStyles, Divider, List, Notification, NumberInput, Space, Text, TextInput, Title } from '@mantine/core'
+import { Box, Button, Center, createStyles, Divider, List, Notification, NumberInput, ScrollArea, Space, Text, TextInput, Title } from '@mantine/core'
 import { IconCheck, IconX } from '@tabler/icons';
 
 import React, { useState } from 'react'
 import { Bill } from '../Interface';
 
 const useStyles = createStyles({
-  box: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    // maxWidth: '800px',
-    backgroundColor: "#fff",
-    color: 'black',
-    padding: '20px',
-    margin: '20px 0'
-  },
+  // box: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   // maxWidth: '800px',
+  //   backgroundColor: "#fff",
+  //   color: 'black',
+  //   padding: '20px',
+  //   margin: '20px 0'
+  // },
 
-  moneyBox: {
-    padding: '20px',
-    textAlign: 'center'
-  },
+  // moneyBox: {
+  //   padding: '20px',
+  //   textAlign: 'center'
+  // },
 
-  incomeBox: {
-    color: 'lightgreen',
-    // borderRight: '2px solid gray',
-  },
+  // incomeBox: {
+  //   color: 'lightgreen',
+  //   // borderRight: '2px solid gray',
+  // },
 
-  expanseBox: {
-    color: 'red',
-    // borderLeft: '2px solid gray',
-  },
+  // expanseBox: {
+  //   color: 'red',
+  //   // borderLeft: '2px solid gray',
+  // },
 
   ul: {
     listStyle: 'none',
@@ -65,29 +65,25 @@ interface Props {
   deleteTransaction: (id: number) => void;
 }
 
-export function Head({ transactions, deleteTransaction, addTransaction }: Props) {
+export function Head({ deleteTransaction, addTransaction }: Props) {
 
   const { classes, cx } = useStyles();
   const [reason, setReason] = useState("")
   const [amount, setAmount] = useState(0)
-  // const [income, setIncome] = useState(0)
-  // const [expanse, setExpanse] = useState(0)
-  // const [balance, setBalance] = useState(income - expanse)
-  // const [total, setTotal] = useState()
   const [transaction, setTransaction] = useState<Bill[]>([])
 
-  const amounts = transactions.map((transaction) => transaction.amount);
+  // const amounts = transactions.map((transaction) => transaction.amount);
 
-  // const amounts = transactions.map((transaction) => transaction.amount)
-  const income = amounts
-    .filter((amount) => amount > 0)
-    .reduce((acc, curr) => (acc += curr), 0);
+  // // const amounts = transactions.map((transaction) => transaction.amount)
+  // const income = amounts
+  //   .filter((amount) => amount > 0)
+  //   .reduce((acc, curr) => (acc += curr), 0);
 
-  const expanse = amounts
-    .filter((amount) => amount < 0)
-    .reduce((acc, curr) => (acc += curr), 0);
+  // const expanse = amounts
+  //   .filter((amount) => amount < 0)
+  //   .reduce((acc, curr) => (acc += curr), 0);
 
-  const total = amounts.reduce((acc, item) => (acc += item), 0);
+  // const total = amounts.reduce((acc, item) => (acc += item), 0);
 
   const add = () => {
     const bill = {
@@ -113,7 +109,7 @@ export function Head({ transactions, deleteTransaction, addTransaction }: Props)
 
   return (
     <Box>
-      <h3 style={{ textAlign: 'center' }}>Expanse Tracker</h3>
+      {/* <h3 style={{ textAlign: 'center' }}>Expanse Tracker</h3>
 
       <Title order={4}>Your Balance</Title>
       <Title order={3}>${total}</Title>
@@ -128,10 +124,12 @@ export function Head({ transactions, deleteTransaction, addTransaction }: Props)
           <Title order={4}>EXPANSE</Title>
           <Title order={3} className={classes.expanseBox}>${expanse}</Title>
         </div>
-      </Box>
+      </Box> */}
+
       <Box>
         <Title order={3}>History</Title>
         <Divider my="sm" />
+        {/* <ScrollArea style={{ width: 300, height: 200 }}> */}
         {transaction.map((money: Bill, key: number) => (
           <ul className={classes.ul} key={key}>
             <li
@@ -143,6 +141,7 @@ export function Head({ transactions, deleteTransaction, addTransaction }: Props)
             </li>
           </ul>
         ))}
+        {/* </ScrollArea> */}
       </Box>
 
       <Space h="md" />
@@ -151,7 +150,7 @@ export function Head({ transactions, deleteTransaction, addTransaction }: Props)
         <Title order={3}>Transaction</Title>
         <Divider my="sm" />
         <Text>Text</Text>
-        <TextInput value={reason} onChange={(event) => setReason(event.currentTarget.value)} />
+        <TextInput required value={reason} onChange={(event) => setReason(event.currentTarget.value)} />
         <Space h="md" />
         <Text>Amount</Text>
         <NumberInput value={amount} onChange={(val: number) => setAmount(val)} />
