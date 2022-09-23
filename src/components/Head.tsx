@@ -59,10 +59,13 @@ const useStyles = createStyles({
 })
 
 interface Props {
+
+  addTransaction: (transaction: Bill) => void;
   transactions: Bill[];
+  deleteTransaction: (id: number) => void;
 }
 
-export function Head({ transactions }: Props) {
+export function Head({ transactions, deleteTransaction, addTransaction }: Props) {
 
   const { classes, cx } = useStyles();
   const [reason, setReason] = useState("")
@@ -80,19 +83,19 @@ export function Head({ transactions }: Props) {
     .filter((amount) => amount > 0)
     .reduce((acc, curr) => (acc += curr), 0);
 
-  console.log(income + amount)
   const expanse = amounts
-    .filter((amount) => amount > 0)
+    .filter((amount) => amount < 0)
     .reduce((acc, curr) => (acc += curr), 0);
 
   const total = amounts.reduce((acc, item) => (acc += item), 0);
 
-  const addTransaction = () => {
+  const add = () => {
     const bill = {
       id: Math.random(),
       reason: reason,
-      amount: amount + income
+      amount: amount
     }
+    addTransaction(bill);
 
     console.log(bill)
     setTransaction([...transaction, bill]);
@@ -131,7 +134,11 @@ export function Head({ transactions }: Props) {
         <Divider my="sm" />
         {transaction.map((money: Bill, key: number) => (
           <ul className={classes.ul} key={key}>
-            <li className={cx(classes.li, money.amount > 0 ? classes.income : classes.expanse)}>
+            <li
+              className={cx(classes.li, money.amount > 0 ? classes.income : classes.expanse)}
+              key={money.id}
+              onClick={() => delTransaction(money.id)}
+            >
               <span>{money.reason}</span><span>{money.amount}</span>
             </li>
           </ul>
@@ -149,7 +156,7 @@ export function Head({ transactions }: Props) {
         <Text>Amount</Text>
         <NumberInput value={amount} onChange={(val: number) => setAmount(val)} />
         <Space h="md" />
-        <Button fullWidth onClick={addTransaction}>Add Transaction</Button>
+        <Button fullWidth onClick={add}>Add Transaction</Button>
       </Box>
     </Box>
   )

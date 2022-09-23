@@ -24,12 +24,22 @@ const initialTransactions: Bill[] = [
 
 export default function App() {
 
+
   const [transactions, setTransactions] =
     useState<Bill[]>(initialTransactions);
 
+  function addTransaction(transaction: Bill) {
+    setTransactions([...transactions, transaction]);
+  }
+
+  function deleteTransaction(id: number) {
+    const filtered = transactions.filter((t) => t.id !== id);
+    setTransactions(filtered);
+  }
+
   return (
     <Center style={{ width: 500 }}>
-      <Head transactions={transactions} />
+      <Head addTransaction={addTransaction} transactions={transactions} deleteTransaction={deleteTransaction} />
     </Center>
   );
 }
